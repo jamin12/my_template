@@ -1,0 +1,1 @@
+module.exports.mainCtrl = require('./main.ctrl');
