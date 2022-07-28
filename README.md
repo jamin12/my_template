@@ -1,21 +1,17 @@
 # my_template
 ## node template
 - sequelize db 
-  - 시쿼라이즈 orm 설정
 - passport(google OAuth2 authentication)
-  - passport 구글 로그인 설정
 - session db
-  - db 세션 관리
 - error handling
 - catchAsyncErrors
-  - 라우터 async 에러 핸들러
 - pick
-  - 필요한 메소드 뽑아쓰는것
 - file upload
-  - 파일 업로드
 - validate
-  - requests 데이터 검증
 - auth
-  - 사용자 권한 확인
 - log
-  - log 작업
+- cors
+- xss
+- compression
+- helmet
+- authLimiter
