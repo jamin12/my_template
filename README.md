@@ -2,6 +2,7 @@
 ## node template
 - sequelize db 
 - passport(google OAuth2 authentication)
+- passport(local)
 - session db
 - error handling
 - catchAsyncErrors
@@ -15,3 +16,6 @@
 - compression
 - helmet
 - authLimiter
+- user manage
+- file manage
+- validate

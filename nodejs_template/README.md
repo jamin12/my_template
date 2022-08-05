@@ -3,6 +3,7 @@
   - 시쿼라이즈 orm 설정
 - passport(google OAuth2 authentication)
   - passport 구글 로그인 설정
+  - passport 로컬 로그인 설정
 - session db
   - db 세션 관리
 - error handling
@@ -26,3 +27,15 @@
 - xss
 - authLimiter
   - 불필요한 많은 요청이 들어 올 시 요청 제한
+- user manage
+  - 로그인
+  - 유저생성
+  - 삭제
+  - 수정
+  - 조회
+- file manage
+  - 생성
+  - 수정
+  - 삭제
+  - 다운
+- validate
