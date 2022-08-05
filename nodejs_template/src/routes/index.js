@@ -1,16 +1,28 @@
-"use strict";
-
 const express = require('express');
-const router = express.Router();
+const authRoutes = require('./auth.routes');
+const userRoutes = require('./user.routes');
+const mainRoutes = require('./main.routes');
+const fileRoutes = require('./file.routes');
 
-const mainRoute = require('./main.routes');
+const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: '/main',
-    route: mainRoute,
+    path: '/',
+    route: authRoutes
   },
-  
+  {
+    path: '/user',
+    route: userRoutes
+  },
+  {
+    path: '/file',
+    route: fileRoutes
+  },
+  {
+    path: '/main',
+    route: mainRoutes,
+  },
 ];
 
 const devRoutes = [

@@ -9,7 +9,7 @@ const passport = require("passport");
 const session = require("express-session");
 const mysqlstore = require("express-mysql-session")(session);
 const logger = require('./src/config/logger');
-const error_handler = require('./src/middleware/error');
+const { errorConverter, errorHandler} = require('./src/middleware/error');
 const cors = require('cors');
 const xss = require('xss')
 const { authLimiter } = require('./src/middleware/rateLimiter');
@@ -76,6 +76,7 @@ if (config.env === 'production') {
 app.use("/",home); // use -> 미들웨어를 등록해주는 메서드.
 
 // 에러 핸들러 미들웨어 설정
-app.use(error_handler);
+app.use(errorConverter);
+app.use(errorHandler);
 
 module.exports = app;

@@ -1,15 +1,43 @@
-const CustomError = require("../util/Error/customError");
-const result_dto = require("../dto/resultDto");
+const ApiError = require("../util/Error/customError");
 const logger = require("../config/logger");
+const httpStatus = require('http-status');
+const config = require('../config/config');
 
-module.exports = (err,req,res,next) => {
-    // 결과 값을 담기위한 dto 설정
-    const result = new result_dto();
-    // err이 CustomeError이면 true
-    if(err instanceof CustomError) {
-        logger.error("err : " + err + "\nerror stack : " + err.stack);
-        return res.status(err.status).json(result.makeResult(err.status,err.message));
+const errorConverter = (err, req, res, next) => {
+    let error = err;
+    if (!(error instanceof ApiError)) {
+        const statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+        const message = error.message || httpStatus[statusCode];
+        error = new ApiError(statusCode, message, false, err.stack);
     }
-    logger.error(`err : ${err.message} \n error stack ${err.stack}`);
-    return res.status(500).json(result.makeResult(500,"server error"));
+    next(error);
+};
+
+// eslint-disable-next-line no-unused-vars
+const errorHandler = (err, req, res, next) => {
+    let { statusCode, message } = err;
+    if (config.env === 'production' && !err.isOperational) {
+        statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+        message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
+    }
+
+    res.locals.errorMessage = err.message;
+
+    const response = {
+        code: statusCode,
+        status: 'fail',
+        message,
+        ...(config.env === 'development' && { stack: err.stack }),
+    };
+
+    if (config.env === 'development') {
+        logger.error(`${err.message}\n${err.stack}`);
+    }
+
+    res.status(statusCode).send(response);
+};
+
+module.exports = {
+    errorConverter,
+    errorHandler,
 };
