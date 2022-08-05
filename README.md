@@ -1,21 +1,2 @@
 # my_template
-## node template
-- sequelize db 
-- passport(google OAuth2 authentication)
-- passport(local)
-- session db
-- error handling
-- catchAsyncErrors
-- pick
-- file upload
-- validate
-- auth
-- log
-- cors
-- xss
-- compression
-- helmet
-- authLimiter
-- user manage
-- file manage
-- validate
+## [](https://github.com/jamin12/my_template/tree/main/nodejs_template)
